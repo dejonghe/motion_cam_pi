@@ -15,7 +15,6 @@ class CamTrigger(object):
         self.pin = pin
         io.setmode(io.BCM)
         self.s3 = self._aws_setup(bucket,profile)
-        self.camera = picamera.PiCamera()
         io.setup(self.pin, io.IN)
        
         
@@ -28,7 +27,10 @@ class CamTrigger(object):
         
     def capture(self, fname='image.jpg'):
         try:
-            self.camera.capture(fname)
+            with picamera.PiCamera() as camera
+                camera.exposure_mode = 'auto'
+                camera.awb_mode = 'auto'
+                camera.capture(fname)
             logger.info("Image Captured: {}".format(fname))
         except Exception as e:
             logger.warn("Camera Failed to capture: {}".format(e))

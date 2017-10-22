@@ -66,7 +66,7 @@ class CamTrigger(object):
     def run(self):
         logger.info('RaspberryPi Camera Trigger Started.')
         logger.info('Running Test Image.')
-        fname = self._get_now_fname
+        fname = self._get_now_fname()
         self.cud(fname)
         while True:
           try:

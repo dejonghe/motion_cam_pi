@@ -25,4 +25,12 @@ node() {
             sh "python setup.py sdist"
         }
     }
+    stage('deploy') {
+        dir('picamtrigger'){
+            sshagent(['PiDeploy']) (
+              sh 'scp dist/picamtrigger-0.0.0.tar.gz  pi@192.168.1.137:/home/pi/'
+              sh 'ssh pi@192.168.1.137 "sudo pip3.6 install picamtrigger-0.0.0.tar.gz --force-reinstall --upgrade"
+            )
+        }
+    }
 }

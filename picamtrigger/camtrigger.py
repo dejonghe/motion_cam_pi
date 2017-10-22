@@ -71,6 +71,7 @@ class CamTrigger(object):
         while True:
           try:
               if io.input(self.pin):
+                  fname = self._get_now_fname()
                   self.cud(fname)
                   time.sleep(5)
           except Exception as e:

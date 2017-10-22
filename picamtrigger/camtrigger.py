@@ -27,7 +27,7 @@ class CamTrigger(object):
         
     def capture(self, fname='image.jpg'):
         try:
-            with picamera.PiCamera() as camera
+            with picamera.PiCamera() as camera:
                 camera.exposure_mode = 'auto'
                 camera.awb_mode = 'auto'
                 camera.capture(fname)

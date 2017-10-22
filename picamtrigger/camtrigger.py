@@ -7,7 +7,7 @@ import time
 import RPi.GPIO as io
 from datetime import datetime
 
-logger = logging.getLogger('pimotioncam')
+logger = logging.getLogger('camtrigger')
 
 class CamTrigger(object):
     def __init__(self,pin,bucket,profile='default'):

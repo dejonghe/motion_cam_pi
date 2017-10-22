@@ -28,6 +28,8 @@ class CamTrigger(object):
     def capture(self, fname='image.jpg'):
         try:
             with picamera.PiCamera() as camera:
+                camera.resolution = (2592, 1944)
+                camera.framerate = 15
                 camera.exposure_mode = 'auto'
                 camera.awb_mode = 'auto'
                 camera.capture(fname)
@@ -51,17 +53,24 @@ class CamTrigger(object):
         os.remove(fname)
         logger.info("Image deleted {}".format(fname))
 
+    def cud(self,fname):
+        self.capture(filename)
+        self.upload(filename)
+        self.delete(filename)
+ 
+    def _get_now_fname(self):
+        now = datetime.now()
+        timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+        return "{}.jpg".format(timestamp)
+
     def run(self):
         logger.info('RaspberryPi Camera Trigger Started.')
+        logger.info('Running Test Image.')
+        self.cud(self._get_now_fname)
         while True:
           try:
               if io.input(self.pin):
-                  now = datetime.now()
-                  timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
-                  filename = "{}.jpg".format(timestamp)
-                  self.capture(filename)
-                  self.upload(filename)
-                  self.delete(filename)
+                  self.cud(self._get_now_fname)
                   time.sleep(5)
           except Exception as e:
               logger.error("Hit a error, going to continue on. Here's the thing: {}".format(e))

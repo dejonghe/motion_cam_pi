@@ -54,9 +54,9 @@ class CamTrigger(object):
         logger.info("Image deleted {}".format(fname))
 
     def cud(self,fname):
-        self.capture(filename)
-        self.upload(filename)
-        self.delete(filename)
+        self.capture(fname)
+        self.upload(fname)
+        self.delete(fname)
  
     def _get_now_fname(self):
         now = datetime.now()

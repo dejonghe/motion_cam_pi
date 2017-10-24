@@ -38,7 +38,8 @@ def main():
     mt = CamTrigger(
         args.input_pin,
         args.bucket,
-        args.profile)
+        args.profile,
+        args.sensitivity)
 
     mt.run()
 

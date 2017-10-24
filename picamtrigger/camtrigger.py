@@ -82,7 +82,7 @@ class CamTrigger(object):
         exit()
 
     def run(self):
-        signal.signal(signal.SIGINT, self._clean_break())
+        signal.signal(signal.SIGINT, self._clean_break)
         logger.info('RaspberryPi Camera Trigger Started.')
         logger.info('Running Test Image.')
         fname = self._get_now_fname()

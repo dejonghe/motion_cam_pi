@@ -69,7 +69,7 @@ class CamTrigger(object):
            reading = io.input(self.pin)
            logger.debug("Reading: {}".format(reading))
            if reading:
-               time.sleep(0.2)
+               time.sleep(0.5)
                continue
            return False
        return True

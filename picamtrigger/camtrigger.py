@@ -92,7 +92,6 @@ class CamTrigger(object):
                 if self._trigger():
                     fname = self._get_now_fname()
                     self.cud(fname)
-                    time.sleep(5)
                 time.sleep(0.5)
             except Exception as e:
                 logger.error("Hit a error, going to continue on. Here's the thing: {}".format(e))

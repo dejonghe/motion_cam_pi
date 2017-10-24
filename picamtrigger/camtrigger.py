@@ -3,6 +3,7 @@ import logging
 import os
 import picamera
 import time
+import signal
 
 import RPi.GPIO as io
 from datetime import datetime
@@ -76,6 +77,7 @@ class CamTrigger(object):
         
 
     def run(self):
+        signal.signal(signal.SIGINT, exit(0))
         logger.info('RaspberryPi Camera Trigger Started.')
         logger.info('Running Test Image.')
         fname = self._get_now_fname()

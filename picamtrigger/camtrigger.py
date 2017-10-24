@@ -67,8 +67,8 @@ class CamTrigger(object):
     def _trigger(self):
        for i in range(self.sensitivity):
            reading = io.input(self.pin)
+           logger.debug("Reading: {}".format(reading))
            if reading:
-               logger.debug(reading)
                time.sleep(0.2)
                continue
            return False

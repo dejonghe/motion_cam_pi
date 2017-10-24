@@ -10,6 +10,12 @@ __version__ = "0.0.0"
 def main():
     parser = argparse.ArgumentParser(description="RPi Camera Trigger")
     parser.add_argument(
+        '-d', 
+        '--debug', 
+        dest='debug', 
+        action='store_true', 
+        help='Turn on log level debug')
+    parser.add_argument(
         '-i',
         '--input_pin',
         type=int,
@@ -34,6 +40,9 @@ def main():
         default=1,
         help='Sensitivity setting of the camera trigger, this is how many times in a row the pin triggers on a .2 second loop.')
     args = parser.parse_args()
+
+    if args.debug:
+        console_logger.setLevel(logging.DEBUG)
  
     mt = CamTrigger(
         args.input_pin,

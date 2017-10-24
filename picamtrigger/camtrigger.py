@@ -77,18 +77,18 @@ class CamTrigger(object):
         
 
     def run(self):
-        signal.signal(signal.SIGINT, break)
         logger.info('RaspberryPi Camera Trigger Started.')
         logger.info('Running Test Image.')
         fname = self._get_now_fname()
         self.cud(fname)
         while True:
-          try:
-              if self._trigger():
-                  fname = self._get_now_fname()
-                  self.cud(fname)
-                  time.sleep(5)
-              time.sleep(0.5)
-          except Exception as e:
-              logger.error("Hit a error, going to continue on. Here's the thing: {}".format(e))
+            signal.signal(signal.SIGINT, break)
+            try:
+                if self._trigger():
+                    fname = self._get_now_fname()
+                    self.cud(fname)
+                    time.sleep(5)
+                time.sleep(0.5)
+            except Exception as e:
+                logger.error("Hit a error, going to continue on. Here's the thing: {}".format(e))
   

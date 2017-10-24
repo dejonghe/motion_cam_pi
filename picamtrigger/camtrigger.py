@@ -10,9 +10,10 @@ from datetime import datetime
 logger = logging.getLogger('camtrigger')
 
 class CamTrigger(object):
-    def __init__(self,pin,bucket,profile='default'):
+    def __init__(self,pin,bucket,profile='default',sensitivity=1):
         self.bucket = bucket
         self.pin = pin
+        self.sensitivity = sensitivity
         io.setmode(io.BCM)
         self.s3 = self._aws_setup(bucket,profile)
         io.setup(self.pin, io.IN)
@@ -63,6 +64,15 @@ class CamTrigger(object):
         timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
         return "{}.jpg".format(timestamp)
 
+    def _trigger(self):
+       for i in self.sensitivity:
+           if io.input(self.pin):
+               time.sleep(0.2)
+               continue
+           return false
+       return true
+        
+
     def run(self):
         logger.info('RaspberryPi Camera Trigger Started.')
         logger.info('Running Test Image.')
@@ -70,7 +80,7 @@ class CamTrigger(object):
         self.cud(fname)
         while True:
           try:
-              if io.input(self.pin):
+              if self._trigger():
                   fname = self._get_now_fname()
                   self.cud(fname)
                   time.sleep(5)

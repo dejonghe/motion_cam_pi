@@ -27,6 +27,12 @@ def main():
         type=str,
         default='default',
         help='AWS profile to use.')
+    parser.add_argument(
+        '-s',
+        '--sensitivity',
+        type=int,
+        default=1,
+        help='Sensitivity setting of the camera trigger, this is how many times in a row the pin triggers on a .2 second loop.')
     args = parser.parse_args()
  
     mt = CamTrigger(

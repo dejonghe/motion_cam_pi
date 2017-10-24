@@ -65,7 +65,7 @@ class CamTrigger(object):
         return "{}.jpg".format(timestamp)
 
     def _trigger(self):
-       for i in self.sensitivity:
+       for i in range(self.sensitivity):
            if io.input(self.pin):
                time.sleep(0.2)
                continue
@@ -84,7 +84,7 @@ class CamTrigger(object):
                   fname = self._get_now_fname()
                   self.cud(fname)
                   time.sleep(5)
+              time.sleep(0.5)
           except Exception as e:
               logger.error("Hit a error, going to continue on. Here's the thing: {}".format(e))
-          time.sleep(0.5)
   

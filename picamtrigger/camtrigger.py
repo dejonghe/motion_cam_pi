@@ -69,8 +69,8 @@ class CamTrigger(object):
            if io.input(self.pin):
                time.sleep(0.2)
                continue
-           return false
-       return true
+           return False
+       return True
         
 
     def run(self):

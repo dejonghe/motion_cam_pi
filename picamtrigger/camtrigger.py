@@ -75,7 +75,7 @@ class CamTrigger(object):
            return False
        return True
         
-    def _clean_break(self):
+    def _clean_break(self, signal, frame):
         logger.info("Kill capture")
         fname = self._get_now_fname()
         self.cud(fname)
